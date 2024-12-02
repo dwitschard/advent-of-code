@@ -1,13 +1,13 @@
 import utils.FileReader
 import utils.LineInputMapper
-
+import kotlin.math.max
+import kotlin.math.min
 
 
 fun main() {
-    val inputMapper = DayOneInputMapper()
-    val input = inputMapper.mapLines(FileReader().readLines("/01.txt"))
+    val day1 = Day1(DayOneInputMapper())
 
-    val day1 = Day1()
+    val input = day1.inputMapper.mapLines(FileReader().readLines("/01.txt"))
 
     val distance = day1.calculateDistance(input.first, input.second)
     println("The Distance of the given Input is: $distance")
@@ -17,8 +17,7 @@ fun main() {
 }
 
 
-
-class Day1 {
+class Day1(val inputMapper: LineInputMapper<List<String>, Pair<List<Int>, List<Int>>>) {
 
     fun calculateSimilarity(base: List<Int>, compareList: List<Int>): Int {
         val lookupTable = compareList.associateWith { baseNumber -> compareList.count { baseNumber == it } }
@@ -33,19 +32,16 @@ class Day1 {
             throw IllegalArgumentException("Column Sizes need to match!")
         }
 
-        var totalDistance = 0
         val sortedLeftColumn = leftColumn.sortedByDescending { it.toInt() }
         val sortedRightColumn = rightColumn.sortedByDescending { it.toInt() }
 
-        sortedLeftColumn
+        return sortedLeftColumn
             .map { it.toInt() }
             .mapIndexed { index, leftNumber ->
                 val rightNumber = sortedRightColumn[index].toInt()
-                val distance = Math.max(leftNumber, rightNumber) - Math.min(leftNumber, rightNumber)
-                totalDistance += distance
+                max(leftNumber, rightNumber) - min(leftNumber, rightNumber)
             }
-
-        return totalDistance
+            .sum()
     }
 
 }
