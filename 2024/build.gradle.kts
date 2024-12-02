@@ -16,10 +16,8 @@ dependencies {
 }
 
 sourceSets.main {
-    resources.srcDirs("src/main/resources")
+    resources.srcDir("src/main/resources")
 }
-
-
 
 tasks.test {
     useJUnitPlatform()

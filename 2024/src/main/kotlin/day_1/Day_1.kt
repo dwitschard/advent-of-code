@@ -9,11 +9,9 @@ import technical.RiddleExecutor
 
 fun main() {
 
-    RiddleExecutor(LineFileReader("/01.txt"), ColumnInputMapper(), DistanceCalculator())
+    RiddleExecutor(LineFileReader("/Day_1.txt"), ColumnInputMapper(), DistanceCalculator())
         .executeAndPrint("The Distance of the given Input is")
 
-    RiddleExecutor(LineFileReader("/01.txt"), ColumnInputMapper(), SimilarityScoreCalculator())
+    RiddleExecutor(LineFileReader("/Day_1.txt"), ColumnInputMapper(), SimilarityScoreCalculator())
         .executeAndPrint("The Similarity of the given Input is")
 }
-
-
