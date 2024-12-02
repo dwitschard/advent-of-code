@@ -48,16 +48,6 @@ class SafeReportCalculatorTest {
     }
 
     @Test
-    fun testDescendingOrderWithMaxDepth() {
-        assertTrue(calculator.isDescending(listOf(9, 8, 8), maxDepth = 1))
-    }
-
-    @Test
-    fun testAscendingOrderWithMaxDepth() {
-        assertTrue(calculator.isAscending(listOf(1, 3), maxDepth = 1))
-    }
-
-    @Test
     fun testDescendingOrderWithAscendingLists() {
         assertFalse(calculator.isDescending(listOf(9, 7, 7)))
         assertFalse(calculator.isDescending(listOf(9, 7, 8)))
