@@ -1,12 +1,16 @@
-package utils
+package technical
 
 import java.io.File
 import java.net.URL
 
 
-class FileReader {
+interface RiddleFileReader<O> {
+    fun read(): O
+}
 
-    fun readLines(fileName: String): List<String> {
+class LineFileReader(private val fileName: String): RiddleFileReader<List<String>> {
+
+    override fun read(): List<String> {
         val file: URL? = object {}.javaClass.getResource(fileName)
 
         if (file != null) {
@@ -16,7 +20,7 @@ class FileReader {
         return emptyList()
     }
 
-    fun readFile(fileName: String): String {
+    /*fun readFile(fileName: String): String {
         val inputStream = object {}.javaClass.getResourceAsStream(fileName)
 
         return inputStream?.bufferedReader(Charsets.UTF_8)?.use { it.readText() }
@@ -24,6 +28,6 @@ class FileReader {
     }
 
     fun readFileAsLinesUsingGetResourceAsStream(fileName: String) =
-        this::class.java.getResourceAsStream(fileName)?.bufferedReader()?.readLines()
+        this::class.java.getResourceAsStream(fileName)?.bufferedReader()?.readLines()*/
 
 }
