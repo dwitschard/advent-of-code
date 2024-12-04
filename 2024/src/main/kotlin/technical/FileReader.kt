@@ -8,7 +8,16 @@ interface RiddleFileReader<O> {
     fun read(): O
 }
 
-class LineFileReader(private val fileName: String): RiddleFileReader<List<String>> {
+class BlobFileReader(private val filename: String) : RiddleFileReader<String> {
+    override fun read(): String {
+        val inputStream = object {}.javaClass.getResourceAsStream(filename)
+
+        return inputStream?.bufferedReader(Charsets.UTF_8)?.use { it.readText() }
+            ?: "Resource not found: $filename"
+    }
+}
+
+class LineFileReader(private val fileName: String) : RiddleFileReader<List<String>> {
 
     override fun read(): List<String> {
         val file: URL? = object {}.javaClass.getResource(fileName)
@@ -20,14 +29,9 @@ class LineFileReader(private val fileName: String): RiddleFileReader<List<String
         return emptyList()
     }
 
-    /*fun readFile(fileName: String): String {
-        val inputStream = object {}.javaClass.getResourceAsStream(fileName)
-
-        return inputStream?.bufferedReader(Charsets.UTF_8)?.use { it.readText() }
-            ?: "Resource not found: $fileName"
-    }
-
+    /*
     fun readFileAsLinesUsingGetResourceAsStream(fileName: String) =
-        this::class.java.getResourceAsStream(fileName)?.bufferedReader()?.readLines()*/
+        this::class.java.getResourceAsStream(fileName)?.bufferedReader()?.readLines()
+    */
 
 }
